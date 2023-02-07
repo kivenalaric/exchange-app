@@ -1,0 +1,40 @@
+.xchange__main {
+  background-image: url('https://images.pexels.com/photos/14358449/pexels-photo-14358449.jpeg?auto=compress&cs=tinysrgb&w=600');
+  background-size: cover;
+  background-color: #b482246a;
+  background-repeat: no-repeat;
+  margin: 0;
+  padding: 0;
+  background-position: bottom;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100vh;
+}
+.xchange__sec2 {
+  max-width: 90%;
+  width: 80%;
+  /* width: fit-content; */
+  padding: 3%;
+  background-image: url('https://images.pexels.com/photos/7567304/pexels-photo-7567304.jpeg?auto=compress&cs=tinysrgb&w=600');
+  background-repeat: no-repeat;
+  background-size: cover;
+  box-shadow: #311b04 10px 10px 15px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+}
+
+.xchange__h1 {
+  color: #b46c24;
+  text-shadow: #311b04 5px 0px 6px;
+  background-color: #ffffff4f;
+}
+
+.xchange__p {
+  font-size: 30px;
+  font-weight: 800;
+  margin: 0;
+}

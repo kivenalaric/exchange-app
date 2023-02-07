@@ -1,0 +1,75 @@
+/* sidebar Nav */
+
+.menu__main {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100vw;
+}
+
+.menu__main button {
+  position: fixed;
+  left: 10px;
+  top: 10px;
+  z-index: 10;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+}
+
+.menu__li {
+  text-decoration: underline;
+  font-size: 20px;
+  font-style: italic;
+  font-weight: 700;
+  color: #fff;
+  font-family: 'lora';
+  display: block;
+  padding: 0 10px;
+  text-transform: uppercase;
+}
+
+.menuNav {
+  overflow-y: scroll;
+  list-style: none;
+  position: fixed;
+  cursor: pointer;
+  margin-left: 30px;
+  top: 0;
+  background: transparent;
+  left: 0;
+  bottom: 0;
+  height: fit-content;
+  width: 0;
+  overflow: hidden;
+  max-width: fit-content;
+  z-index: 9;
+  display: flex;
+}
+
+.menuNav.showMenu {
+  width: 100%;
+}
+
+/* .menuNav li:first-child {
+  margin-top: 2rem;
+} */
+@media only screen and (max-width: 768px) {
+  .menu__li {
+    font-size: 16px;
+  }
+
+  .menu__main button {
+    left: 2;
+  }
+  
+  .menuNav {
+    margin-left: 10px;
+  }
+  
+  .menuNav.showMenu {
+    width: 100%;
+  }
+}

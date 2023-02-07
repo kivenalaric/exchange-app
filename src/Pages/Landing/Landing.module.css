@@ -1,0 +1,148 @@
+.landing__main {
+  background-image: linear-gradient(to bottom right, #4b47af, #27255c, #080736);
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: center;
+}
+
+.landing__sec {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5%;
+  max-width: 95%;
+  width: 90%;
+  height: fit-content;
+  background-color: #443eea15;
+  padding: 20px;
+}
+
+.landing__sech {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.landing__sechh1 {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  text-align: center;
+  font-family: 'Merriweather';
+  font-style: italic;
+  font-weight: 800;
+  font-size: 40px;
+  color: #fff;
+  text-shadow: #030220 5px 10px 6px;
+}
+
+.landing__sechh1 span {
+  align-items: center;
+  display: flex;
+}
+
+.landing__sechh1 span img {
+  filter: drop-shadow(#030220 5px 10px 6px);
+}
+
+.landing__logo {
+  width: 50px;
+  height: 40px;
+}
+
+.landing__sec2 {
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 5%;
+}
+
+.landing__left {
+  max-width: 40%;
+  color: #fff;
+  gap: 5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.landing__lefttext {
+  margin-top: 20px;
+  margin-bottom: 90px;
+}
+
+.landing__leftbottom {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.landing__leftbottomimg {
+  width: 60%;
+  margin: auto;
+  border-radius: 25%;
+  box-shadow: #030220 10px 15px 5px;
+  transform: rotate(45deg);
+}
+
+.landing__right {
+  max-width: 60%;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5%;
+}
+
+.landing__righttop {
+  max-width: 100%;
+  display: flex;
+  margin: auto;
+}
+
+.landing__rightpic {
+  width: 40%;
+  margin: auto;
+}
+
+@media only screen and (max-width: 768px) {
+  .landing__sec {
+    height: fit-content;
+  }
+  .landing__main {
+    position: absolute;
+    height: fit-content;
+  }
+
+  .landing__sech {
+    margin: auto;
+  }
+
+  .landing__sechh1 {
+    font-size: 20px;
+  }
+
+  .landing__sec2 {
+    flex-direction: column;
+    max-height: fit-content;
+    justify-content: space-between;
+    gap: 100px;
+  }
+
+  .landing__left {
+    max-width: 80%;
+    margin: auto;
+  }
+  .landing__right {
+    max-width: 80%;
+    margin: auto;
+  }
+  .landing__rightpic {
+    width: 70%;
+  }
+}
