@@ -46,6 +46,7 @@
 
 .landing__sechh1 span img {
   filter: drop-shadow(#030220 5px 10px 6px);
+  color: #fff;
 }
 
 .landing__logo {

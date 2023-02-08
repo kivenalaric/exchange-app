@@ -17,7 +17,7 @@ function Currency() {
                 alt="imagelogo"
                 className={LandingCss.landing__logo}
               />
-              Change
+              CHANGE
             </span>
           </h1>
         </div>
