@@ -7,6 +7,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  max-width: 100vw;
   min-height: 100vh;
 }
 .xchange__sec2 {
@@ -83,8 +84,7 @@
   justify-content: center;
   display: flex;
   flex-direction: column;
-  max-width: 80vw;
-  width: 100%;
+  width: 80%;
   gap: 50px;
 }
 
@@ -124,7 +124,7 @@
   margin: 0;
   padding: 0;
   color: #fff;
-  font-family: "lora";
+  font-family: 'lora';
   text-decoration: underline;
   font-style: italic;
 }
@@ -134,7 +134,7 @@
   justify-content: space-between;
   margin: auto;
   align-items: center;
-  width: 100%; 
+  width: 100%;
 }
 
 .xchange__wallets {
@@ -178,11 +178,20 @@
   background-color: #03012a50;
   display: flex;
   flex-direction: column;
-  padding: 5px 8px;
+  padding: 20px 30px;
+  max-width: 100vw;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
   gap: 5px;
   z-index: 1;
   margin-bottom: 10px;
 }
+
+/* .deposit__secondry {
+  ba
+} */
 
 .deposit__input {
   display: flex;
@@ -201,6 +210,20 @@
 .wallet__second button {
   background-color: transparent;
   border: none;
+}
+
+.select__default {
+  border: none;
+  background-color: transparent;
+  color: #fff;
+  font-size: 30px;
+  font-family: 'lora';
+  font-weight: 700;
+}
+
+.select__option {
+  background-color: #410e5367;
+  font-size: 20px;
 }
 
 .wallet__second button i {
