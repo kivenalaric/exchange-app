@@ -13,24 +13,21 @@ import Xchange from './Pages/exchange/Xchange';
 const options = { method: 'GET', headers: { accept: 'application/json' } };
 const ApiKey = 'b0bce07b6d-2702c6e805-rpth9i';
 function App() {
-  const [defaultCurrency, setDefaultCurrrency] = useState('USD');
-  // console.log(defaultCurrency);
-  // const [options, setOptions] = useState([]);
-  // useEffect(() => {
-  //   console.log(getSymbols);
-  // const [currency, setCurrency] = useState([]);
+  const [defaultCurrency, setDefaultCurrrency] = useState('');
   const [currencyOptions, setCurrencyOptions] = useState([]);
-  // console.log(currencyOptions);
-  // }, []);
+  const [exchangeRates, setExchangeRates] = useState([]);
+
   useEffect(() => {
     fetch(
       `https://api.fastforex.io/fetch-all?from=USD&api_key=${ApiKey}`,
       options
     )
       .then((response) => response.json())
-      .then((res) =>
-        setCurrencyOptions([res.base, ...Object.keys(res.results)])
-      )
+      .then((res) => {
+        const rates = Object.keys(res.results)[0];
+        setCurrencyOptions([...Object.keys(res.results)]);
+        setExchangeRates(res.results[rates]);
+      })
       .catch((err) => console.error('error ocured', err));
   }, []);
   return (
@@ -40,6 +37,7 @@ function App() {
         setDefaultCurrrency,
         currencyOptions,
         setCurrencyOptions,
+        exchangeRates,
       }}
     >
       <BrowserRouter>

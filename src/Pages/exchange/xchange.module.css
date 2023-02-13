@@ -160,6 +160,10 @@
   box-shadow: #430e71 5px 6px 10px;
 }
 
+.wallet__default {
+  display: flex;
+}
+
 .wallet__first {
   color: #fff;
   font-family: 'Lora';
@@ -214,9 +218,14 @@
   max-width: 100%;
 }
 
+button {
+  cursor: pointer;
+}
+
 .deposit__input input {
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
+  padding: 3px 10px;
 }
 
 .deposit__input select {

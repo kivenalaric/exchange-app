@@ -1,8 +1,9 @@
+/* eslint-disable react/no-array-index-key */
 /* eslint-disable no-alert */
 /* eslint-disable no-console */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/jsx-no-bind */
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Menu from '../../Components/Menu/Menu';
 import MyContext from '../../context/context';
 import XchangeCss from './xchange.module.css';
@@ -23,25 +24,29 @@ function xchange() {
   const closePopUp = () => {
     setIsOpen(false);
   };
-  const { defaultCurrency, setDefaultCurrrency, currencyOptions } =
-    useContext(MyContext);
+  const {
+    defaultCurrency,
+    setDefaultCurrrency,
+    currencyOptions,
+    exchangeRates,
+  } = useContext(MyContext);
 
-  const convertCurrency = () => {};
+  console.log(exchangeRates);
 
-  const handleAdd = (event) => {
-    event.preventDefault();
-    if (event.target.elements.amount.value <= 0) {
+  const handleAdd = (AMT, Money) => {
+    if (AMT <= 0) {
       alert('please input a reasonable amount');
     } else {
       setWallet((prev) => [
         ...prev,
         {
-          amount: event.target.elements.amount.value,
-          currency: event.target.elements.money.value,
+          amount: AMT,
+          currency: Money,
         },
       ]);
     }
-    setTotalAmount((prev) => prev + +event.target.elements.amount.value);
+    const RESULTS = (AMT / 1) * 640;
+    setTotalAmount((prev) => prev + RESULTS);
   };
 
   return (
@@ -79,8 +84,12 @@ function xchange() {
             <form
               className={XchangeCss.deposit__main}
               onSubmit={(e) => {
-                handleAdd(e);
-                closePopUp(e);
+                e.preventDefault();
+                handleAdd(
+                  +e.target.elements.amount.value,
+                  e.target.elements.money.value
+                );
+                closePopUp();
               }}
             >
               <div className={XchangeCss.deposit__input}>
@@ -90,8 +99,8 @@ function xchange() {
                   placeholder="Make Deposit here"
                 />
                 <select name="currency" id="money">
-                  {currencyOptions.map((option) => (
-                    <option value={option} id="option" key={option}>
+                  {currencyOptions.map((option, index) => (
+                    <option value={option} id="option" key={index}>
                       {option}
                     </option>
                   ))}
@@ -115,11 +124,11 @@ function xchange() {
                   name="select"
                   id="select"
                 >
-                  {currencyOptions.map((option) => (
+                  {currencyOptions.map((option, index) => (
                     <option
                       className={XchangeCss.select__option}
                       value="currency"
-                      key={option}
+                      key={index}
                     >
                       {option}
                     </option>
@@ -137,9 +146,10 @@ function xchange() {
             {popUp && (
               <div className={XchangeCss.popup__overlay}>
                 <form
-                  action="submit"
                   className={XchangeCss.transfer__form}
-                  onSubmit={() => {
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    // console.log('this e', e);
                     togglePopup();
                   }}
                 >
@@ -155,11 +165,11 @@ function xchange() {
                     name="select"
                     id="select"
                   >
-                    {currencyOptions.map((option) => (
+                    {currencyOptions.map((option, index) => (
                       <option
                         className={XchangeCss.select__option}
                         value="currency"
-                        key={option}
+                        key={index}
                       >
                         {option}
                       </option>
@@ -171,18 +181,18 @@ function xchange() {
                 </form>
               </div>
             )}
-            {wallet.map((data) => {
+            {wallet.map((data, index) => {
               return (
                 <div className={XchangeCss.xchange__wallet}>
                   <div className={XchangeCss.wallet__first}>
-                    <h2>{data.currency}</h2>
+                    <h2 key={index}>{data.currency}</h2>
                     <p>Amount</p>
                   </div>
                   <div className={XchangeCss.wallet__second}>
                     <button type="button" onClick={togglePopup}>
                       <i className="fa fa-exchange" aria-hidden="true" />
                     </button>
-                    <p>{data.amount}</p>
+                    <p key={index}>{data.amount}</p>
                   </div>
                 </div>
               );
