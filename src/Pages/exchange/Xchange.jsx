@@ -1,14 +1,21 @@
+/* eslint-disable no-alert */
+/* eslint-disable no-console */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/jsx-no-bind */
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Menu from '../../Components/Menu/Menu';
 import MyContext from '../../context/context';
 import XchangeCss from './xchange.module.css';
 
 function xchange() {
   const [isOpen, setIsOpen] = useState(false);
-  const [amount, setAmount] = useState('');
-  const [currency, setCurrency] = useState('');
+  const [totalAmount, setTotalAmount] = useState(0);
+  const [popUp, setPopup] = useState(false);
+
+  const togglePopup = () => {
+    setPopup((prev) => !prev);
+  };
+
   const handleClickOpen = () => {
     setIsOpen(!isOpen);
   };
@@ -16,17 +23,27 @@ function xchange() {
   const closePopUp = () => {
     setIsOpen(false);
   };
-  // const [wallet, setWallet] = useState([
-  //   { currency: 'USD', amount: 100 },
-  //   { currency: 'EUR', amount: 500 },
-  //   { currency: 'XAF', amount: 10000 },
-  // ]);
   const { defaultCurrency, setDefaultCurrrency, currencyOptions } =
     useContext(MyContext);
+
+  const convertCurrency = () => {};
+
   const handleAdd = (event) => {
-    setWallet([setAmount(event.target.value)]);
-    // setCurrency(currencyOptions);
+    event.preventDefault();
+    if (event.target.elements.amount.value <= 0) {
+      alert('please input a reasonable amount');
+    } else {
+      setWallet((prev) => [
+        ...prev,
+        {
+          amount: event.target.elements.amount.value,
+          currency: event.target.elements.money.value,
+        },
+      ]);
+    }
+    setTotalAmount((prev) => prev + +event.target.elements.amount.value);
   };
+
   return (
     <div className={XchangeCss.xchange__main}>
       <div className={XchangeCss.xchange__sec1}>
@@ -58,30 +75,33 @@ function xchange() {
           </button>
         </div>
         {isOpen ? (
-          <form className={XchangeCss.deposit__main}>
-            <div className={XchangeCss.deposit__secondry}>
+          <div className={XchangeCss.deposit__secondry}>
+            <form
+              className={XchangeCss.deposit__main}
+              onSubmit={(e) => {
+                handleAdd(e);
+                closePopUp(e);
+              }}
+            >
               <div className={XchangeCss.deposit__input}>
-                <input type="number" id="amount" />
+                <input
+                  type="number"
+                  id="amount"
+                  placeholder="Make Deposit here"
+                />
                 <select name="currency" id="money">
                   {currencyOptions.map((option) => (
-                    <option value="option" key={option}>
+                    <option value={option} id="option" key={option}>
                       {option}
                     </option>
                   ))}
                 </select>
               </div>
-              <button
-                type="button"
-                onClick={() => {
-                  handleAdd();
-                  closePopUp();
-                }}
-                className={XchangeCss.deposit__btn}
-              >
+              <button type="submit" className={XchangeCss.deposit__btn}>
                 Deposit +
               </button>
-            </div>
-          </form>
+            </form>
+          </div>
         ) : (
           ''
         )}
@@ -108,69 +128,65 @@ function xchange() {
                 <p>Amount</p>
               </div>
               <div className={XchangeCss.wallet__second}>
-                <button type="button">
-                  <i className="fa fa-exchange" aria-hidden="true" />
-                </button>
-                <p>100</p>
+                <h1>Total</h1>
+                <p>{totalAmount}</p>
               </div>
             </div>
           </div>
           <div className={XchangeCss.xchange__wallets}>
-            <div className={XchangeCss.xchange__wallet}>
-              <div className={XchangeCss.wallet__first}>
-                <h2>USD</h2>
-                <h4>USD</h4>
-                <p>Amount</p>
+            {popUp && (
+              <div className={XchangeCss.popup__overlay}>
+                <form
+                  action="submit"
+                  className={XchangeCss.transfer__form}
+                  onSubmit={() => {
+                    togglePopup();
+                  }}
+                >
+                  <h4>Tranfer</h4>
+                  <input
+                    type="number"
+                    className={XchangeCss.transfer__input}
+                    placeholder="Enter Amount"
+                  />
+                  <p>To</p>
+                  <select
+                    className={XchangeCss.select__default}
+                    name="select"
+                    id="select"
+                  >
+                    {currencyOptions.map((option) => (
+                      <option
+                        className={XchangeCss.select__option}
+                        value="currency"
+                        key={option}
+                      >
+                        {option}
+                      </option>
+                    ))}
+                  </select>
+                  <button type="submit" className={XchangeCss.transer__btn}>
+                    Transfer
+                  </button>
+                </form>
               </div>
-              <div className={XchangeCss.wallet__second}>
-                <button type="button">
-                  <i className="fa fa-exchange" aria-hidden="true" />
-                </button>
-                <p>100</p>
-              </div>
-            </div>
-            {wallet.map(() => {
+            )}
+            {wallet.map((data) => {
               return (
                 <div className={XchangeCss.xchange__wallet}>
                   <div className={XchangeCss.wallet__first}>
-                    <h2>{currency}</h2>
+                    <h2>{data.currency}</h2>
                     <p>Amount</p>
                   </div>
                   <div className={XchangeCss.wallet__second}>
-                    <button type="button">
+                    <button type="button" onClick={togglePopup}>
                       <i className="fa fa-exchange" aria-hidden="true" />
                     </button>
-                    <p>{amount}</p>
+                    <p>{data.amount}</p>
                   </div>
                 </div>
               );
             })}
-            {/* <div className={XchangeCss.xchange__wallet}>
-              <div className={XchangeCss.wallet__first}>
-                <h2>EUR</h2>
-                <h4>Euro</h4>
-                <p>Amount</p>
-              </div>
-              <div className={XchangeCss.wallet__second}>
-                <button type="button">
-                  <i className="fa fa-exchange" aria-hidden="true" />
-                </button>
-                <p>500</p>
-              </div>
-            </div> */}
-            {/* <div className={XchangeCss.xchange__wallet}>
-              <div className={XchangeCss.wallet__first}>
-                <h2>XAF</h2>
-                <h4>C.A Franc</h4>
-                <p>Amount</p>
-              </div>
-              <div className={XchangeCss.wallet__second}>
-                <button type="button">
-                  <i className="fa fa-exchange" aria-hidden="true" />
-                </button>
-                <p>10,000</p>
-              </div>
-            </div> */}
           </div>
         </div>
       </div>

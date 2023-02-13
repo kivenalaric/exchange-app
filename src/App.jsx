@@ -14,13 +14,13 @@ const options = { method: 'GET', headers: { accept: 'application/json' } };
 const ApiKey = 'b0bce07b6d-2702c6e805-rpth9i';
 function App() {
   const [defaultCurrency, setDefaultCurrrency] = useState('USD');
-  console.log(defaultCurrency);
+  // console.log(defaultCurrency);
   // const [options, setOptions] = useState([]);
   // useEffect(() => {
   //   console.log(getSymbols);
   // const [currency, setCurrency] = useState([]);
   const [currencyOptions, setCurrencyOptions] = useState([]);
-  console.log(currencyOptions);
+  // console.log(currencyOptions);
   // }, []);
   useEffect(() => {
     fetch(
