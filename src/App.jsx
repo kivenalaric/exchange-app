@@ -1,3 +1,4 @@
+/* eslint-disable no-plusplus */
 /* eslint-disable no-console */
 /* eslint-disable react/jsx-no-constructed-context-values */
 import { useEffect, useState } from 'react';
@@ -24,12 +25,15 @@ function App() {
     )
       .then((response) => response.json())
       .then((res) => {
-        const rates = Object.keys(res.results)[0];
+        // const firstRate = Object.keys(res.results)[2];
         setCurrencyOptions([...Object.keys(res.results)]);
-        setExchangeRates(res.results[rates]);
+        setExchangeRates(res.results);
       })
       .catch((err) => console.error('error ocured', err));
   }, []);
+
+  console.log('this xchangeRates in app', exchangeRates);
+
   return (
     <MyContext.Provider
       value={{
@@ -37,6 +41,7 @@ function App() {
         setDefaultCurrrency,
         currencyOptions,
         setCurrencyOptions,
+        setExchangeRates,
         exchangeRates,
       }}
     >

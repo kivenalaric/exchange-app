@@ -9,8 +9,17 @@ import MyContext from '../../context/context';
 import XchangeCss from './xchange.module.css';
 
 function xchange() {
-  const [isOpen, setIsOpen] = useState(false);
+  const {
+    defaultCurrency,
+    setDefaultCurrrency,
+    currencyOptions,
+    exchangeRates,
+    setExchangeRates,
+  } = useContext(MyContext);
+
+  const [isOpen, setIsOpen] = useState(true);
   const [totalAmount, setTotalAmount] = useState(0);
+  const [previousSign, setpreviousSign] = useState('AED');
   const [popUp, setPopup] = useState(false);
 
   const togglePopup = () => {
@@ -20,20 +29,28 @@ function xchange() {
   const handleClickOpen = () => {
     setIsOpen(!isOpen);
   };
-  const [wallet, setWallet] = useState([]);
+  const [wallet, setWallet] = useState([
+    {
+      amount: 0,
+      currency: 'USD',
+    },
+    {
+      amount: 0,
+      currency: 'XAF',
+    },
+    {
+      amount: 0,
+      currency: 'EUR',
+    },
+  ]);
+
   const closePopUp = () => {
     setIsOpen(false);
   };
-  const {
-    defaultCurrency,
-    setDefaultCurrrency,
-    currencyOptions,
-    exchangeRates,
-  } = useContext(MyContext);
 
   console.log(exchangeRates);
 
-  const handleAdd = (AMT, Money) => {
+  const handleAdd = (AMT, curr) => {
     if (AMT <= 0) {
       alert('please input a reasonable amount');
     } else {
@@ -41,12 +58,21 @@ function xchange() {
         ...prev,
         {
           amount: AMT,
-          currency: Money,
+          currency: curr,
         },
       ]);
     }
-    const RESULTS = (AMT / 1) * 640;
+    const RESULTS = (AMT / 1) * +exchangeRates[curr];
+    console.clear();
+    console.log('this RESULTS', AMT, exchangeRates, curr);
     setTotalAmount((prev) => prev + RESULTS);
+  };
+
+  const handleChangeDefault = (sign) => {
+    const RESULTS =
+      (totalAmount / exchangeRates[previousSign]) * +exchangeRates[sign];
+    setTotalAmount(RESULTS);
+    setpreviousSign(sign);
   };
 
   return (
@@ -123,14 +149,17 @@ function xchange() {
                   className={XchangeCss.select__default}
                   name="select"
                   id="select"
+                  onChange={(e) => {
+                    handleChangeDefault(e.target.value);
+                  }}
                 >
-                  {currencyOptions.map((option, index) => (
+                  {wallet.map((option, index) => (
                     <option
                       className={XchangeCss.select__option}
-                      value="currency"
+                      value={option.currency}
                       key={index}
                     >
-                      {option}
+                      {option.currency}
                     </option>
                   ))}
                 </select>
