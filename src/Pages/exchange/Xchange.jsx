@@ -30,18 +30,18 @@ function xchange() {
     setIsOpen(!isOpen);
   };
   const [wallet, setWallet] = useState([
-    {
-      amount: 0,
-      currency: 'USD',
-    },
-    {
-      amount: 0,
-      currency: 'XAF',
-    },
-    {
-      amount: 0,
-      currency: 'EUR',
-    },
+    // {
+    //   amount: 0,
+    //   currency: 'USD',
+    // },
+    // {
+    //   amount: 0,
+    //   currency: 'XAF',
+    // },
+    // {
+    //   amount: 0,
+    //   currency: 'EUR',
+    // },
   ]);
 
   const closePopUp = () => {
